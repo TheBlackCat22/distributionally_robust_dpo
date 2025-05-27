@@ -188,7 +188,7 @@ Use the output completions file created at `outputs/llama1b_wdpo/global_step_316
 
 **OpenLLM Leaderboard Alignment**
 ```bash
-bash openllm_eval.slurm \
+bash openllm_eval.sh \
   --model_path=outputs/llama1b_kldpo/global_step_158
 ```
 
