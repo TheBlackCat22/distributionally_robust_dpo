@@ -6,12 +6,15 @@ Traditional methods like RLHF and DPO assume training and deployment populations
 
 ---
 
-## Experimental Setup: ArmoRM Multi-Objective Alignment
+## Experimental Setup
 
-### Models
+<details>
+<summary> <h3> ArmoRM Multi-Objective Alignment </h3> (click to expand) </summary>
+
+#### Models
 * `LLaMA-3.2-1B-Instruct`
 
-### Procedure
+#### Procedure
 1. Generate 2 completions per HelpSteer2 prompt.
 2. Score completions via Stage 1 [ArmoRM](#references) objectives.
 3. Construct mixed scores from convex combinations of (left to right plots):
@@ -27,20 +30,21 @@ Traditional methods like RLHF and DPO assume training and deployment populations
     * ultrafeedback_honesty
     * Stage 2 [ArmoRM](#references) objective
 
-### Key Results
+#### Key Results
 ![DPO, WDPO, and KLDPO in ArmoRM multi-objective alignment.](assets/llama1b-armo-spider.png)
 **WDPO** and **KLDPO** outperform DPO, even on **unseen objectives**, showing stronger generalization and robustness.
 
----
+</details>
 
-### Experimental Setup: OpenLLM Leaderboard Alignment
+<details>
+<summary> <h3> OpenLLM Leaderboard Alignment </h3> (click to expand) </summary>
 
-### Models
+#### Models
 * `LLaMA-3.2-1B-Instruct`
 * `LLaMA-3.2-3B-Instruct`
 * `LLaMA-3.1-8B-Instruct`
 
-### Procedure
+#### Procedure
 1. Generate 10 completions per HelpSteer2 prompt.
 2. Score completions via Stage 2 [ArmoRM](#references) objective.
 3. Build top-vs-bottom preference dataset.
@@ -53,11 +57,13 @@ Traditional methods like RLHF and DPO assume training and deployment populations
     * IFEval
     * BBH
 
-> ⚠️ Only KLDPO was used for the 8B model due to compute limits.
+> Only KLDPO was used for the 8B model due to compute limits.
 
-### Key Results
+#### Key Results
 ![Evaluation of DPO, KLDPO and WDPO on OpenLLM Leaderboard 2](assets/llama-table.png)
 DPO underperforms SFT, highlighting the need for robust methods. **WDPO/KLDPO** show consistent robust gains across tasks.
+
+</details>
 
 ---
 
@@ -99,7 +105,7 @@ bash generate_completions.sh \
   --temperature=0.7
 ```
 
----
+<br>
 
 ### Step 2: Generate Preference Dataset
 
@@ -135,7 +141,7 @@ python src/generate_preferences.py \
 
 </details>
 
----
+<br>
 
 ### Step 3: Train
 
@@ -165,7 +171,7 @@ bash train_alignment.sh \
   --wdpo_rho=0.01
 ```
 
----
+<br>
 
 ### Step 4: Evaluate
 
