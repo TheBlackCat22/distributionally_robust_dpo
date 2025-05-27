@@ -69,8 +69,8 @@ DPO underperforms SFT, highlighting the need for robust methods. **WDPO/KLDPO** 
 * CUDA ≥ 12.4
 
 ```bash
-git clone ...
-cd ...
+git clone https://github.com/TheBlackCat22/distributionally_robust_dpo
+cd distributionally_robust_dpo
 huggingface-cli login
 bash setup.sh
 ```
