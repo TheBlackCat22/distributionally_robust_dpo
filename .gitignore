@@ -1,0 +1,8 @@
+__pycache__
+/.deepspeed_env
+/.cache
+/.ipynb_checkpoints
+
+/datasets
+/models
+/outputs
