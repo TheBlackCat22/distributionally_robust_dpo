@@ -18,9 +18,9 @@ Traditional methods like RLHF and DPO assume training and deployment populations
 1. Generate 2 completions per HelpSteer2 prompt.
 2. Score completions via Stage 1 [ArmoRM](#references) objectives.
 3. Construct mixed scores from convex combinations of (left to right plots):
-   * `ultrafeedback_truthfulness + helpSteer_complexity`
-   * `ultrafeedback_helpfulness + helpSteer_coherence`
-   * `helpSteer_correctness + helpSteer_helpfulness`
+   * `ultrafeedback_truthfulness + helpsteer_complexity`
+   * `ultrafeedback_helpfulness + helpsteer_coherence`
+   * `helpsteer_correctness + helpsteer_helpfulness`
 4. Build top-vs-bottom preference datasets.
 5. Train with DPO, WDPO, or KLDPO.
 6. Evaluate using Stage 1 [ArmoRM](#references) objectives across:
@@ -57,7 +57,7 @@ Traditional methods like RLHF and DPO assume training and deployment populations
     * IFEval
     * BBH
 
-> Only KLDPO was used for the 8B model due to compute limits.
+> NOTE: Only KLDPO was used for the 8B model due to compute limits.
 
 #### Key Results
 ![Evaluation of DPO, KLDPO and WDPO on OpenLLM Leaderboard 2](assets/llama-table.png)
