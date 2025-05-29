@@ -1,12 +1,12 @@
 #!/bin/bash
 
 echo -e "\n\nCreating Conda Env"
-# conda create -n drdpo_env python=3.11 gcc_linux-64=13.3.0 gxx_linux-64=13.3.0 binutils=2.42 libstdcxx-ng=13.3.0 nccl=2.22.3 cuda-version=12.4 -c conda-forge -y
+conda create -n drdpo_env python=3.11 gcc_linux-64=13.3.0 gxx_linux-64=13.3.0 binutils=2.42 libstdcxx-ng=13.3.0 nccl=2.22.3 cuda-version=12.4 -c conda-forge -y
 source $(conda info --base)/etc/profile.d/conda.sh
 conda activate drdpo_env
 
 echo -e "\n\nInstalling Torch"
-# pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cu124
+pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cu124
 
 echo -e "\n\nInstalling Deepspeed"
 git clone https://github.com/microsoft/DeepSpeed.git --branch v0.16.4 -c advice.detachedHead=false
