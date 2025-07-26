@@ -1,8 +1,8 @@
 #!/bin/bash
 
 kldpo_tau=""
-wdpo_rho=""
 drdpo_beta=""
+wdpo_rho=""
 for i in "$@"; do
   case "$i" in
     --model_path=*)
@@ -17,6 +17,9 @@ for i in "$@"; do
     --kldpo_tau=*)
       kldpo_tau="--kldpo_tau ${i#*=}"
       ;;
+    --drdpo_beta=*)
+      drdpo_beta="--drdpo_beta ${i#*=}"
+      ;;
     --wdpo_rho=*)
       wdpo_rho="--wdpo_rho ${i#*=}"
       ;;
@@ -25,10 +28,10 @@ done
 
 if ! [ -z "$kldpo_tau" ]; then
   train_task="kldpo"
-elif ! [ -z "$wdpo_rho" ]; then
-  train_task="wdpo"
 elif ! [ -z "$drdpo_beta" ]; then
   train_task="drdpo"
+elif ! [ -z "$wdpo_rho" ]; then
+  train_task="wdpo"
 else
   train_task="dpo"
 fi
@@ -69,7 +72,7 @@ run_command="deepspeed src/train_preference.py \
 --apply_chat_template \
 --max_len 2048 \
 --use_tensorboard $save_path \
-$kldpo_tau $wdpo_rho $drdpo_beta
+$kldpo_tau $drdpo_beta $wdpo_rho
 "
 echo -e "\n\n\nRun Command:"
 echo $run_command
