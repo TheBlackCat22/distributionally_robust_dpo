@@ -13,6 +13,7 @@ from openrlhf.utils import blending_datasets, get_strategy, get_tokenizer
 from actor import Actor
 from kldpo import KLDPOTrainer
 from wdpo import WDPOTrainer
+from drdpo import DRDPOTrainer
 
 
 def train(args):
@@ -142,6 +143,8 @@ def train(args):
         trainer_cls = KLDPOTrainer
     elif args.train_task == 'wdpo':
         trainer_cls = WDPOTrainer
+    elif args.train_task == 'drdpo':
+        trainer_cls = DRDPOTrainer
 
     trainer = trainer_cls(
         model=model,
@@ -197,7 +200,7 @@ if __name__ == "__main__":
     parser.add_argument("--gradient_checkpointing_use_reentrant", action="store_true", default=False)
 
     # DPO
-    parser.add_argument('--train_task', type=str, choices=['dpo', 'kldpo', 'wdpo'])
+    parser.add_argument('--train_task', type=str, choices=['dpo', 'kldpo', 'wdpo', 'drdpo'])
     parser.add_argument("--max_epochs", type=int, default=1)
     parser.add_argument("--l2", type=float, default=0.0, help="weight decay loss")
     parser.add_argument("--beta", type=float, default=0.1)
@@ -210,6 +213,7 @@ if __name__ == "__main__":
     parser.add_argument("--adam_betas", type=float, nargs=2, default=(0.9, 0.95), help="Betas for Adam optimizer")
     parser.add_argument("--kldpo_tau", type=float, default=1.0, help="Tau in KLDPO")
     parser.add_argument("--wdpo_rho", type=float, default=1.0, help="Rho in WDPO")
+    parser.add_argument("--drdpo_beta", type=float, default=1.0, help="Beta\' in DRDPO")
 
     # Context Parallel
     parser.add_argument("--ring_attn_size", type=int, default=1, help="Ring attention group size")

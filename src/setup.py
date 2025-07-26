@@ -13,6 +13,16 @@ def get_helpsteer2_prompts_dataset(split):
     return dataset
     
 
+def get_ultrafeedback_preferences_dataset(split):
+    if split == 'train':
+        split = 'train_prefs'
+    elif split == 'test':
+        split = 'test_prefs'
+    dataset = load_dataset("HuggingFaceH4/ultrafeedback_binarized", split=split)
+    dataset = dataset.map(lambda example: {'prompt':[example['chosen'][0],], 'chosen':[example['chosen'][1],], 'chosen_score':example['score_chosen'], 'rejected':[example['rejected'][1],], 'rejected_score':example['score_rejected']}, remove_columns=dataset.column_names)
+    return dataset
+    
+
 def main(config):
 
     os.makedirs('datasets', exist_ok=True)
@@ -116,7 +126,8 @@ if __name__ == '__main__':
         },
         
         'Datasets' : {
-            'helpsteer2_prompts' : get_helpsteer2_prompts_dataset
+            'helpsteer2_prompts' : get_helpsteer2_prompts_dataset,
+            'ultrafeedback_preferences' : get_ultrafeedback_preferences_dataset
         },
 
     }
